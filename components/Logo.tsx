@@ -1,4 +1,5 @@
-import Link from "next/link";
+
+import Link from 'next/link';
 import TerminalIcon from '../public/assets/svg/terminal.svg'
 
 const Logo = () => {

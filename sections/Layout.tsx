@@ -2,7 +2,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import React from 'react'
 import Head from "next/head";
-import { useRouter } from "next/router";
+import {useRouter} from 'next/router'
 
 export type HomeLayoutProps = {
     title: string
@@ -12,7 +12,6 @@ export type HomeLayoutProps = {
 
 
 const Layout = ({ children, pageMeta }: any) => {
-
     const router = useRouter()
 
     const meta = {

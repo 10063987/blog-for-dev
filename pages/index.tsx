@@ -1,10 +1,17 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../sections/Layout'
-
+import { useSession, signIn } from 'next-auth/react'
+import Link from 'next/link'
 
 
 const Home: NextPage = () => {
+
+  const { data: session, status } = useSession()
+
+
+
+
   return (
     <Layout pageMeta={{
       title: 'My awesome blog',
@@ -25,18 +32,29 @@ const Home: NextPage = () => {
 
 
         {/* CTA  */}
-        <button
-          type="button"
-          onClick={() => { }}
-          className="
+        {status === 'loading' ? null : status === 'unauthenticated' ? (
+
+          <button
+            type="button"
+            onClick={() => signIn()}
+            className="
             bg-blue-600 hover:bg-blue-700 text-white 
             px-6 py-3 rounded-md border-2 border-blue-600 
             hover:border-blue-700 text-lg sm:text-xl 
             focus:outline-none focus:ring-4 focus:ring-blue-600 
             focus:ring-opacity-50 whitespace-nowrap"
-        >
-          Start your blog for free
-        </button>
+          >
+            Start your blog for free
+          </button>
+        ) : (
+          <Link href="/new">
+            <a className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md border-2 border-blue-600 hover:border-blue-700 text-lg sm:text-xl focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 whitespace-nowrap flex justify-center items-center space-x-2">
+              {/* <PencilIcon className="w-6 h-6 flex-shrink-0" /> */}
+              <span>Write a blog post</span>
+            </a>
+          </Link>
+        )
+        }
       </section>
 
     </Layout>
